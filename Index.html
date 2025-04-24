@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TravelDesk Request Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    form {
+      background: #fff;
+      padding: 30px;
+      max-width: 850px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 25px;
+    }
+    .col {
+      flex: 1;
+      min-width: 220px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<form action="https://formsubmit.co/vishwajeet17091999@gmail.com" method="POST">
+  <h2>TravelDesk Request Form</h2>
+
+  <div class="row">
+    <div class="col">
+      <label>Full Name</label>
+      <input type="text" name="Full Name" required>
+    </div>
+    <div class="col">
+      <label>Email</label>
+      <input type="email" name="Email" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label>Date of Birth</label>
+      <input type="date" name="DOB" id="dob" required>
+    </div>
+    <div class="col">
+      <label>Age</label>
+      <input type="text" id="age" name="Age" readonly>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label>Request Type</label>
+      <select name="Request Type" id="requestType" required>
+        <option value="">Select</option>
+        <option value="Travel">Travel</option>
+        <option value="Stay">Stay</option>
+        <option value="Travel + Stay">Travel + Stay</option>
+      </select>
+    </div>
+
+    <div class="col travel-only hidden">
+      <label>Travel Type</label>
+      <select name="Travel Type">
+        <option value="Flight">Flight</option>
+        <option value="Train">Train</option>
+        <option value="Bus">Bus</option>
+      </select>
+    </div>
+
+    <div class="col travel-only hidden">
+      <label>Preferred Timing</label>
+      <input type="text" name="Preferred Timing" placeholder="Morning, Evening...">
+    </div>
+  </div>
+
+  <div class="row travel-only hidden">
+    <div class="col">
+      <label>From Location</label>
+      <input type="text" name="From Location">
+    </div>
+    <div class="col">
+      <label>To Location</label>
+      <input type="text" name="To Location">
+    </div>
+  </div>
+
+  <div class="row travel-only hidden">
+    <div class="col">
+      <label>Travel Date</label>
+      <input type="date" id="travelDate" name="Travel Date">
+    </div>
+    <div class="col">
+      <label>Round Trip</label>
+      <select id="roundTrip" name="Round Trip">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+      </select>
+    </div>
+    <div class="col hidden" id="returnDateCol">
+      <label>Return Date</label>
+      <input type="date" id="returnDate" name="Return Date">
+    </div>
+  </div>
+
+  <div class="row stay-only hidden">
+    <div class="col">
+      <label>Stay Location</label>
+      <input type="text" name="Stay Location">
+    </div>
+    <div class="col">
+      <label>Occupancy Type</label>
+      <select name="Occupancy Type" id="occupancy">
+        <option value="">Select</option>
+        <option value="Single">Single</option>
+        <option value="Double">Double</option>
+        <option value="Triple">Triple</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row stay-only hidden" id="guestEmails">
+    <div class="col">
+      <label>Guest Email 1</label>
+      <input type="email" name="Guest Email 1">
+    </div>
+    <div class="col hidden" id="guestEmail2">
+      <label>Guest Email 2</label>
+      <input type="email" name="Guest Email 2">
+    </div>
+    <div class="col hidden" id="guestEmail3">
+      <label>Guest Email 3</label>
+      <input type="email" name="Guest Email 3">
+    </div>
+  </div>
+
+  <div class="row stay-only hidden">
+    <div class="col">
+      <label>Check-in Date</label>
+      <input type="date" id="checkin" name="Check-in Date">
+    </div>
+    <div class="col">
+      <label>Check-out Date</label>
+      <input type="date" name="Check-out Date">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label>Purpose of Travel / Stay</label>
+      <textarea name="Purpose" rows="3" placeholder="Mention the reason for travel or stay..."></textarea>
+    </div>
+    <div class="col">
+      <label>Remarks / Preferences (Optional)</label>
+      <textarea name="Remarks" rows="3" placeholder="Any special requests or notes..."></textarea>
+    </div>
+  </div>
+
+  <button type="submit">Submit Request</button>
+</form>
+
+<script>
+  const dob = document.getElementById('dob');
+  const age = document.getElementById('age');
+  const returnDateCol = document.getElementById('returnDateCol');
+  const roundTrip = document.getElementById('roundTrip');
+
+  dob.addEventListener('change', () => {
+    const birthDate = new Date(dob.value);
+    const diff = new Date() - birthDate;
+    const calculatedAge = Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
+    age.value = calculatedAge;
+  });
+
+  roundTrip.addEventListener('change', () => {
+    returnDateCol.classList.toggle('hidden', roundTrip.value !== "Yes");
+  });
+
+  const requestType = document.getElementById('requestType');
+  const travelOnly = document.querySelectorAll('.travel-only');
+  const stayOnly = document.querySelectorAll('.stay-only');
+  const occupancy = document.getElementById('occupancy');
+  const guestEmails = document.getElementById('guestEmails');
+  const guestEmail2 = document.getElementById('guestEmail2');
+  const guestEmail3 = document.getElementById('guestEmail3');
+
+  requestType.addEventListener('change', () => {
+    const value = requestType.value;
+
+    const isTravel = value === 'Travel' || value === 'Travel + Stay';
+    const isStay = value === 'Stay' || value === 'Travel + Stay';
+
+    travelOnly.forEach(el => el.classList.toggle('hidden', !isTravel));
+    stayOnly.forEach(el => el.classList.toggle('hidden', !isStay));
+  });
+
+  occupancy.addEventListener('change', () => {
+    const val = occupancy.value;
+    guestEmails.classList.remove('hidden');
+    guestEmail2.classList.toggle('hidden', val !== 'Double' && val !== 'Triple');
+    guestEmail3.classList.toggle('hidden', val !== 'Triple');
+  });
+</script>
+
+</body>
+</html>
